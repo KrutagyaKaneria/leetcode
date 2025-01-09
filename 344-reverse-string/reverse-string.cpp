@@ -1,20 +1,14 @@
 class Solution {
 public:
-    void reverseString(vector<char>& s, int left = 0, int right = -1) {
-        if (right == -1) {
-            right = s.size() - 1;
+    void reverseString(vector<char>& s, int start = 0, int end = -1) {
+        if (end == -1) {
+            end = s.size() - 1;
         }
-
-       
-        if (left >= right) {
+        if (start >= end) {
             return;
         }
-
-       
-        swap(s[left], s[right]);
-
-        
-        reverseString(s, left + 1, right - 1);
+        swap(s[start], s[end]);
+        reverseString(s, start + 1, end - 1);
     }
 };
 
