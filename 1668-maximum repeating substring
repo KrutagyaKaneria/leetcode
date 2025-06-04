@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int maxRepeating(string sequence, string word) {
+        int count = 0;
+        string repeated = word;
+
+        // Keep appending word to itself and check if it's a substring of sequence
+        while (sequence.find(repeated) != string::npos) {
+            count++;
+            repeated += word;
+        }
+
+        return count;
+    }
+};
