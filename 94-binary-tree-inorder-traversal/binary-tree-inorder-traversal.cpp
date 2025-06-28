@@ -11,16 +11,36 @@
  */
 class Solution {
 public:
-    void inorder(TreeNode* root, vector<int>& res) {
-        if (root == nullptr) return;
-        inorder(root->left, res);
-        res.push_back(root->val);
-        inorder(root->right, res);
-    }
-
     vector<int> inorderTraversal(TreeNode* root) {
         vector<int> result;
-        inorder(root, result);
+        TreeNode* curr = root;
+
+        while (curr != nullptr) {
+            if (curr->left == nullptr) {
+                // No left child: visit this node
+                result.push_back(curr->val);
+                curr = curr->right;
+            } else {
+                // Find the rightmost node in left subtree (inorder predecessor)
+                TreeNode* pre = curr->left;
+                while (pre->right != nullptr && pre->right != curr) {
+                    pre = pre->right;
+                }
+
+                if (pre->right == nullptr) {
+                    // Threading: Make a temporary link back to current
+                    pre->right = curr;
+                    curr = curr->left;
+                } else {
+                    // Left subtree already visited
+                    pre->right = nullptr; // Remove the temporary thread
+                    result.push_back(curr->val);
+                    curr = curr->right;
+                }
+            }
+        }
+
         return result;
     }
 };
+
