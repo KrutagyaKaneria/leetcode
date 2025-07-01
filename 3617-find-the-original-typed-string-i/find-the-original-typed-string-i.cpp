@@ -1,20 +1,21 @@
 class Solution {
 public:
-    int possibleStringCount(string word) {
-        int groupCount = 0, totalChoices = 0;
-        int i = 0, n = word.size();
+    int possibleStringCount(string& word) {
+        int totalChoices = 0;
+        int groupCount = 0;
+        int n = word.length();
 
-        while (i < n) {
-            int j = i;
-            while (j < n && word[j] == word[i]) {
-                ++j;
+        for (int i = 0; i < n; ) {
+            int count = 1;
+            while (i + count < n && word[i + count] == word[i]) {
+                ++count;
             }
-            int len = j - i;
-            totalChoices += len;
-            groupCount++;
-            i = j;
+            totalChoices += count;
+            ++groupCount;
+            i += count;
         }
 
         return totalChoices - groupCount + 1;
     }
 };
+
