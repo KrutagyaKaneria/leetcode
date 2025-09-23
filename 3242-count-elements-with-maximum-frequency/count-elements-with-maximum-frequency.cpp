@@ -13,7 +13,7 @@ public:
 
         for (auto p : freq) {
             if (p.second == max) {
-                sum += p.second;
+                sum+=max;
             }
         }
 
