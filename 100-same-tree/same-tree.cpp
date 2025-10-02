@@ -14,9 +14,9 @@ public:
     bool isSameTree(TreeNode* p, TreeNode* q) {
         if(q==NULL || p==NULL){
             return p==q;
-        };
-        bool leftsame = isSameTree(q->left,p->left);
-        bool rightsame= isSameTree(q->right,p->right);
-        return leftsame && rightsame && q->val == p->val;
-}
+        }
+        int leftcount = isSameTree(q->left,p->left);
+        int rightcount = isSameTree(q->right,p->right);
+        return leftcount && rightcount && q->val == p->val;
+    }
 };
