@@ -1,10 +1,18 @@
 class Solution {
 public:
-    int singleNumber(vector<int>& nums) {
-        int result = 0;
-        for (int num : nums) {
-            result ^= num;   // XOR all numbers
+    int singleNumber(vector<int>& nums){
+        map<int, int> freq;
+        int output = 0;
+
+        for (int x : nums) {
+            freq[x]++;
         }
-        return result;
+
+        for (auto x : freq) {
+            if (x.second == 1) {
+                output = x.first;
+            }
+        }
+        return output;
     }
 };
