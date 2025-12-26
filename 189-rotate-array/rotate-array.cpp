@@ -1,15 +1,16 @@
-    class Solution {
-    public:
-        void rotate(vector<int>& nums, int k) {
-            int n = nums.size();
-            if (n == 0 || n == 1) return;
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int n = nums.size();
+        vector<int> temp(n);
 
-            k = k % n;
-            cout << "Effective k = " << k << endl;
-            if (k == 0) return;
+        k = k % n;
 
-            reverse(nums.begin(), nums.end());         // reverse whole array
-            reverse(nums.begin(), nums.begin() + k);   // reverse first k
-            reverse(nums.begin() + k, nums.end());     // reverse rest
+        for(int i = 0; i < n; i++) {
+            temp[(i + k) % n] = nums[i];
         }
-    };
+
+        nums = temp;
+    }
+};
+
