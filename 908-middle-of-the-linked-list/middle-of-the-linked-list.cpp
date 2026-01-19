@@ -19,13 +19,13 @@ public:
             fast = fast->next->next;
         }
 
-        ListNode* curr = slow;
-        while (curr != NULL) {
-            cout << curr->val << " ";
-            curr = curr->next;
-        }
-        cout << endl;
+        // ListNode* curr = slow;
+        // while (curr != NULL) {
+        //     // cout << curr->val << " ";
+        //     curr = curr->next;
+        // }
+        // cout << endl;
 
-        return slow; // return middle node if needed
+        return slow;
     }
 };
