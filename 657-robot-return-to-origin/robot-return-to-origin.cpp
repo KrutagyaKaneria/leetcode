@@ -4,11 +4,11 @@ public:
         int n = moves.size();
         int x = 0;
         int y = 0;
-        for(int i=0;i<n;i++){
-            if(moves[i] == 'L')x++;
-            else if(moves[i] == 'R')x--;
-            else if(moves[i] == 'U')y++;
-            else if(moves[i] == 'D')y--;
+        for(char i : moves){
+            if(i == 'L')x++;
+            else if(i == 'R')x--;
+            else if(i == 'U')y++;
+            else if(i == 'D')y--;
         }
         if(x == 0 && y==0){
             return true;
