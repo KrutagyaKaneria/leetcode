@@ -1,42 +1,56 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
 class Solution {
 public:
     vector<int> nodesBetweenCriticalPoints(ListNode* head) {
-        ListNode* prev = head;
-        ListNode* curr = head->next;
-        ListNode* future = curr->next;
-
-        vector<int> result(2, -1);
-
-        int pos = 2;          // position of curr
         int first = -1;
+
         int last = -1;
-        int mindist = INT_MAX;
 
-        while(future != nullptr){
+        int minDistance = INT_MAX;
 
-            if((curr->val > prev->val && curr->val > future->val) ||
-               (curr->val < prev->val && curr->val < future->val)){
+        int position = 1;
 
-                if(first == -1){
-                    first = pos;
-                }else{
-                    mindist = min(mindist, pos - last);
+        ListNode* prev = head;
+
+        ListNode* curr = head->next;
+
+        while (curr != nullptr && curr->next != nullptr) {
+            bool isCritical =
+                (curr->val > prev->val && curr->val > curr->next->val) ||
+                (curr->val < prev->val && curr->val < curr->next->val);
+
+            if (isCritical) {
+                if (first == -1) {
+                    first = position;
+                } else {
+                    minDistance = min(minDistance, position - last);
                 }
 
-                last = pos;
+                last = position;
             }
 
             prev = curr;
-            curr = future;
-            future = future->next;
-            pos++;
+
+            curr = curr->next;
+
+            position++;
         }
 
-        if(first == last) return {-1,-1};
+        if (first == -1 || first == last) {
+            return {-1, -1};
+        }
 
-        result[0] = mindist;
-        result[1] = last - first;
+        int maxDistance = last - first;
 
-        return result;
+        return {minDistance, maxDistance};
     }
 };
